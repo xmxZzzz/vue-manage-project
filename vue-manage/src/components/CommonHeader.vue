@@ -7,7 +7,15 @@
         size="mini"
         @click="handleMenu"
       ></el-button>
-      <h3 style="color: #fff">首页</h3>
+      <!-- <h3 style="color: #fff">首页</h3> -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item
+          v-for="item in tags"
+          :key="item.path"
+          :to="{ path: item.path }"
+          >{{ item.label }}</el-breadcrumb-item
+        >
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown size="mini" trigger="click">
@@ -23,8 +31,14 @@
   </header>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   name: "CommonHeader",
+  computed: {
+    ...mapState({
+      tags: (state) => state.tab.tabsList,
+    }),
+  },
   data() {
     return {
       userImg: require("../assets/images/user.png"),

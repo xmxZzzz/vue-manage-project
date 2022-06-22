@@ -101,16 +101,13 @@ export default {
         this.echart = echarts.init(this.$refs.echart);
         this.echart.setOption(this.options);
       }
-      console.log(this.options);
     },
     initChartData() {
       if (this.isAxisChart) {
         this.axisOption.xAxis.data = this.chartData.xData;
         this.axisOption.series = this.chartData.series;
-        console.log(this.axisOption);
       } else {
         this.normalOption.series = this.chartData.series;
-        console.log(this.normalOption);
       }
     },
   },

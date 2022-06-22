@@ -29,7 +29,7 @@
         <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group v-for="cItem in item.children" :key="cItem.path">
-        <el-menu-item :index="cItem.path">
+        <el-menu-item :index="cItem.path" @click="clickMenu(cItem)">
           <i :class="'el-icon-' + cItem.icon"></i>
           <span slot="title">{{ cItem.label }}</span>
         </el-menu-item>
@@ -112,6 +112,8 @@ export default {
         name: item.name,
         url: item.url,
       });
+      // 处理面包屑数据
+      this.$store.commit("selectMenu", item);
     },
   },
 };
