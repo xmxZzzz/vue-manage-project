@@ -114,7 +114,7 @@ export default {
           label: "年龄",
         },
         {
-          prop: "sex",
+          prop: "sexLabel",
           label: "性别",
         },
         {
@@ -170,14 +170,14 @@ export default {
       };
     },
     getList(name = "") {
-      console.log(this.config);
+      // console.log(this.config);
       this.config.loading = true;
       name ? (this.config.page = 1) : "";
       getUser({
         page: this.config.page,
         name,
       }).then(({ data: res }) => {
-        console.log(res);
+        // console.log(res);
         this.tableData = res.list.map((item) => {
           item.sexLabel = item.sex === 0 ? "女" : "男";
           return item;
@@ -189,7 +189,7 @@ export default {
     editUser(row) {
       this.operateType = "edit";
       this.isShow = true;
-      this.operateForm = row;
+      this.operateForm = { ...row };
     },
     delUser(row) {
       this.$confirm("此操作将永久删除该数据,是否继续", "提示", {
@@ -199,7 +199,7 @@ export default {
       }).then(() => {
         const id = row.id;
         this.$http
-          .post("/user/del", {
+          .get("/user/del", {
             params: { id },
           })
           .then(() => {
